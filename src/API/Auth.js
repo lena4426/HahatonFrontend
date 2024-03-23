@@ -1,14 +1,41 @@
 import axios from 'axios';
-axios.defaults.baseURL = 'http://83.222.8.190:8080/Authorization/register'
+let baseURL = "http://83.222.8.190:8080/"
 
-async function RegisterRequest(username, email, password) {
+export async function RegisterRequest(username, email, password) {
     let request_data = {
         username: username,
         password: password,
         email: email
     }
-    let res = await axios.post("http://83.222.8.190:8080/Authorization/register", request_data);
-    console.log(res);
+    axios.post(baseURL + "Authorization/register", request_data).then(
+        (res) => {
+            saveAccessToken(res.data["accessToken"]);
+        }
+    ).catch(
+        (res) => {
+            console.log(res);
+        }
+    )
+
 }
 
-export default RegisterRequest;
+export async function LoginRequest(username, password) {
+    let request_data = {
+        login: username,
+        password: password
+    }
+
+    axios.post(baseURL + "Authorization/login", request_data).then(
+        (res) => {
+            saveAccessToken(res.data["accessToken"]);
+        }
+    ).catch(
+        (res) => {
+            console.log(res);
+        }
+    )
+}
+
+async function saveAccessToken(accessToken) {
+    axios.defaults.headers.common = {'Authorization': `bearer ${accessToken}`};
+}

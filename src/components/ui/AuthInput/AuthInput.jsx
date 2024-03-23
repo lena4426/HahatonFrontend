@@ -1,9 +1,9 @@
 import React from 'react';
 import classes from "./AuthInput.module.css";
 
-const AuthInput = ({placeholder}) => {
+const AuthInput = ({placeholder, onChange}) => {
     return (
-        <input className={classes.AuthInput} placeholder={placeholder} type="text"/>
+        <input onChange={(e) => onChange(e.target.value)} className={classes.AuthInput} placeholder={placeholder} type="text"/>
     );
 };
 
