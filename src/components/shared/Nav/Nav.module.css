@@ -1,0 +1,12 @@
+.nav {
+    height: 100vh;
+    background: #4E5C65;
+    padding: 40px 48px 0 48px;
+}
+
+.nav__logo {
+    background: #8D9CA6;
+    color: black;
+    border-radius: 12px;
+    padding: 10px 80px;
+}
